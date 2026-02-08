@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth snap-y snap-mandatory">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake Account Detector | AI Cyber Intelligence</title>
+    <meta name="description" content="Detect fake accounts and deepfakes with AI-powered cyber intelligence." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23020617'/><path d='M50 20 L70 50 L50 80 L30 50 Z' fill='%2300E0FF'/></svg>" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+         :root {
+            /* Premium Cyber Blue Theme (Original) */
+            --color-cyber-dark: #020617;
+            --color-cyber-card: #0B1120;
+            --color-cyber-border: #1E293B;
+            --color-cyber-cyan: #00E0FF;
+            /* Primary Neon Cyan */
+            --color-cyber-green: #7000FF;
+            /* Primary Electric Purple/Indigo */
+            --color-cyber-purple: #312E81;
+            --color-cyber-text: #F1F5F9;
+            --color-cyber-danger: #EF4444;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-panel-bg: #0B1120;
+            --color-input-bg: #020617;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        white: 'var(--color-white)',
+                        black: 'var(--color-black)',
+                        cyber: {
+                            dark: 'var(--color-cyber-dark)',
+                            card: 'var(--color-cyber-card)',
+                            border: 'var(--color-cyber-border)',
+                            cyan: 'var(--color-cyber-cyan)',
+                            green: 'var(--color-cyber-green)',
+                            purple: 'var(--color-cyber-purple)',
+                            text: 'var(--color-cyber-text)',
+                            danger: 'var(--color-cyber-danger)',
+                            panel: 'var(--color-panel-bg)',
+                            input: 'var(--color-input-bg)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'cyber-gradient': 'linear-gradient(135deg, var(--color-cyber-cyan) 0%, var(--color-cyber-green) 100%)',
+                        'cyber-gradient-hover': 'linear-gradient(135deg, var(--color-cyber-green) 0%, var(--color-cyber-cyan) 100%)',
+                        'hero-glow': 'radial-gradient(circle at center, rgba(0, 224, 255, 0.15) 0%, rgba(2, 6, 23, 0) 70%)',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(0, 224, 255, 0.3)',
+                        'neon-green': '0 0 20px rgba(112, 0, 255, 0.3)',
+                        'neon-purple': '0 0 20px rgba(49, 46, 129, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'scale-up': 'scaleUp 0.3s ease-out forwards',
+                        'border-flow': 'border-flow 3s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(20px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        scaleUp: {
+                            '0%': {
+                                transform: 'scale(0.9)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'scale(1)',
+                                opacity: '1'
+                            },
+                        },
+                        'border-flow': {
+                            '0%, 100%': {
+                                'background-position': '0% 50%'
+                            },
+                            '50%': {
+                                'background-position': '100% 50%'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            color: var(--color-cyber-text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            /* Original Deep Blue Animated Gradient */
+            background: linear-gradient(-45deg, #020617, #0B1120, #0F172A, #020617);
+            background-size: 400% 400%;
+            animation: animated-gradient 15s ease infinite;
+        }
+        
+        @keyframes animated-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Custom scrollbar */
+        
+         ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: var(--color-cyber-dark);
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: var(--color-cyber-border);
+            border-radius: 4px;
+            border: 1px solid rgba(0, 224, 255, 0.1);
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-cyber-cyan);
+        }
+        
+        .glass-panel {
+            background: rgba(11, 17, 32, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+        }
+        
+        .neon-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-cyber-cyan), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            background-size: 200% 100%;
+            animation: border-flow 3s linear infinite;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- Changed module path (use relative) -->
+    <script type="module" src="./index.tsx"></script>
+
+    <!-- Backend health-check + overlay -->
+    <style>
+        /* backend status overlay */
+        
+        #backend-status-overlay {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 9999;
+            background: rgba(11, 17, 32, 0.85);
+            color: var(--color-cyber-text);
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: Inter, sans-serif;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            display: grid;
+            gap: 8px;
+            min-width: 260px;
+            align-items: center;
+        }
+        
+        #backend-status-overlay button {
+            background: linear-gradient(90deg, var(--color-cyber-cyan), var(--color-cyber-green));
+            color: #000;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        #backend-status-overlay .status-ok {
+            color: #7CFC00;
+        }
+        
+        #backend-status-overlay .status-fail {
+            color: #FF6B6B;
+        }
+    </style>
+
+    <script>
+        (function() {
+            const LS_KEY = 'API_BASE';
+
+            function readBase() {
+                return (localStorage.getItem(LS_KEY) || '').trim();
+            }
+
+            // UI
+            const overlay = document.createElement('div');
+            overlay.id = 'backend-status-overlay';
+            overlay.innerHTML = `
+				<div><strong>Backend:</strong> <span id="backend-status-text">Checking…</span></div>
+				<div id="backend-status-msg" style="font-size:12px;opacity:0.9"></div>
+				<div class="controls">
+					<input id="backend-url" placeholder="Backend base URL (empty=relative)" />
+					<button id="backend-save">Save</button>
+					<button id="backend-retry">Retry</button>
+				</div>
+			`;
+            document.body.appendChild(overlay);
+
+            const statusText = overlay.querySelector('#backend-status-text');
+            const statusMsg = overlay.querySelector('#backend-status-msg');
+            const retryBtn = overlay.querySelector('#backend-retry');
+            const saveBtn = overlay.querySelector('#backend-save');
+            const urlInput = overlay.querySelector('#backend-url');
+
+            // initialize input from storage
+            urlInput.value = readBase();
+
+            function setStatus(ok, msg) {
+                statusText.textContent = ok ? 'Connected' : 'Disconnected';
+                statusText.className = ok ? 'status-ok' : 'status-fail';
+                statusMsg.textContent = msg || '';
+                if (ok) setTimeout(() => overlay.style.display = 'none', 1200);
+                else overlay.style.display = '';
+            }
+
+            function timeoutFetch(url, ms = 3000) {
+                const controller = new AbortController();
+                const id = setTimeout(() => controller.abort(), ms);
+                return fetch(url, {
+                        method: 'GET',
+                        signal: controller.signal,
+                        mode: 'cors'
+                    })
+                    .then(res => {
+                        clearTimeout(id);
+                        return res;
+                    });
+            }
+
+            function buildEndpoints(base) {
+                // base may be empty => relative paths
+                const b = base ? base.replace(/\/+$/, '') : '';
+                return [{
+                        url: b + '/api/health',
+                        name: (b || '') + '/api/health'
+                    }, {
+                        url: b + '/health',
+                        name: (b || '') + '/health'
+                    }, {
+                        url: b + '/api/status',
+                        name: (b || '') + '/api/status'
+                    },
+                    // fallbacks
+                    {
+                        url: '/api/health',
+                        name: '/api/health'
+                    }, {
+                        url: '/health',
+                        name: '/health'
+                    }
+                ];
+            }
+
+            async function probe() {
+                const base = readBase();
+                const endpoints = buildEndpoints(base);
+                statusText.textContent = 'Checking…';
+                statusText.className = '';
+                statusMsg.textContent = '';
+                for (const ep of endpoints) {
+                    try {
+                        const res = await timeoutFetch(ep.url, 2500);
+                        if (res && res.ok) {
+                            console.info('Backend reachable at', ep.url, 'status', res.status);
+                            setStatus(true, 'Reachable at ' + ep.name);
+                            return;
+                        }
+                    } catch (err) {
+                        // ignore, try next
+                    }
+                }
+                setStatus(false, 'No response. Check backend, CORS, or base URL.');
+            }
+
+            retryBtn.addEventListener('click', probe);
+            saveBtn.addEventListener('click', () => {
+                const v = (urlInput.value || '').trim();
+                if (v) localStorage.setItem(LS_KEY, v);
+                else localStorage.removeItem(LS_KEY);
+                probe();
+            });
+
+            // Expose helper for app code to call API with the saved base
+            window.apiFetch = function(path, opts) {
+                const base = readBase();
+                const prefix = base ? base.replace(/\/+$/, '') : '';
+                const url = prefix + (path.startsWith('/') ? path : '/' + path);
+                return fetch(url, opts);
+            };
+
+            // initial probe
+            window.addEventListener('load', probe);
+        })();
+    </script>
+</body>
+
+</html>
