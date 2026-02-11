@@ -1,4 +1,4 @@
-import { httpClient } from './httpClient';
+import httpClient from './httpClient';
 
 interface LoginCredentials {
   email: string;
@@ -12,28 +12,38 @@ interface RegisterData {
 }
 
 interface LoginResponse {
-  token: string;
-  refreshToken: string;
-  user: { id: string; email: string; username: string };
+  success: boolean;
+  message?: string;
+  token?: string;
+  refreshToken?: string;
+  user?: { id: string; email: string; username: string; role?: string; roles?: string[] };
 }
 
 const authService = {
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
-    const response = await httpClient.post('/auth/login', credentials) as any;
-    if (response.token) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('refreshToken', response.refreshToken);
+    try {
+      const response = await httpClient.post('/auth/login', credentials) as any;
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('refreshToken', response.refreshToken);
+      }
+      return { success: true, ...response };
+    } catch (error: any) {
+      return { success: false, message: error.message || 'Login failed' };
     }
-    return response as LoginResponse;
   },
 
   async register(data: RegisterData): Promise<LoginResponse> {
-    const response = await httpClient.post('/auth/register', data) as any;
-    if (response.token) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('refreshToken', response.refreshToken);
+    try {
+      const response = await httpClient.post('/auth/register', data) as any;
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('refreshToken', response.refreshToken);
+      }
+      return { success: true, ...response };
+    } catch (error: any) {
+      return { success: false, message: error.message || 'Registration failed' };
     }
-    return response as LoginResponse;
   },
 
   async logout(): Promise<void> {
@@ -61,7 +71,7 @@ const authService = {
     return !!this.getToken();
   },
 
-  getUser(): { id: string; email: string; username: string } | null {
+  getUser(): { id: string; email: string; username: string; role?: string; roles?: string[] } | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
     try {
@@ -69,6 +79,15 @@ const authService = {
       return decoded.user;
     } catch {
       return null;
+    }
+  },
+
+  async getUserProfile(): Promise<{ success: boolean; data?: any; message?: string }> {
+    try {
+      const response = await httpClient.get('/auth/profile') as any;
+      return { success: true, data: response };
+    } catch (error: any) {
+      return { success: false, message: error.message || 'Failed to fetch profile' };
     }
   },
 };

@@ -57,4 +57,6 @@ class HttpClient {
   delete<T>(endpoint: string) { return this.request<T>(endpoint, { method: 'DELETE' }); }
 }
 
-export const httpClient = new HttpClient();
+const httpClientInstance = new HttpClient();
+export default httpClientInstance;
+export const httpClient = httpClientInstance;
