@@ -18,9 +18,9 @@ const ReportsTab: FC = () => {
   const loadReports = async () => {
     setLoading(true);
     try {
-      const response = await httpClient.get('/api/reports');
-      if (response.success) {
-        setReports(response.data || []);
+      const response = (await httpClient.get('/api/reports')) as any;
+      if (response?.success) {
+        setReports(response?.data || []);
       }
     } catch (error) {
       console.error('Failed to load reports:', error);
@@ -32,8 +32,8 @@ const ReportsTab: FC = () => {
   const deleteReport = async (reportId: string) => {
     if (!window.confirm('Delete this report?')) return;
     try {
-      const response = await httpClient.delete(`/api/reports/${reportId}`);
-      if (response.success) {
+      const response = (await httpClient.delete(`/api/reports/${reportId}`)) as any;
+      if (response?.success) {
         setReports(reports.filter(r => r._id !== reportId));
       }
     } catch (error) {

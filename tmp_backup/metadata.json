@@ -1,0 +1,9 @@
+{
+  "name": "Fake Account Detector - AI Cyber Intelligence",
+  "description": "A premium, high-tech cybersecurity landing page for detecting fake accounts using AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

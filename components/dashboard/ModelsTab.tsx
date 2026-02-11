@@ -21,9 +21,9 @@ const ModelsTab: FC = () => {
   const loadModels = async () => {
     setLoading(true);
     try {
-      const response = await httpClient.get('/api/models');
-      if (response.success) {
-        const modelList = response.data || [];
+      const response = (await httpClient.get('/api/models')) as any;
+      if (response?.success) {
+        const modelList = response?.data || [];
         setModels(modelList);
         const active = modelList.find((m: MLModel) => m.active);
         if (active) setActiveModel(active);
@@ -37,8 +37,8 @@ const ModelsTab: FC = () => {
 
   const activateModel = async (modelId: string) => {
     try {
-      const response = await httpClient.post(`/api/models/${modelId}/activate`, {});
-      if (response.success) {
+      const response = (await httpClient.post(`/api/models/${modelId}/activate`, {})) as any;
+      if (response?.success) {
         loadModels();
       }
     } catch (error) {
@@ -53,8 +53,8 @@ const ModelsTab: FC = () => {
     }
     if (!window.confirm('Delete this model?')) return;
     try {
-      const response = await httpClient.delete(`/api/models/${modelId}`);
-      if (response.success) {
+      const response = (await httpClient.delete(`/api/models/${modelId}`)) as any;
+      if (response?.success) {
         setModels(models.filter(m => m._id !== modelId));
       }
     } catch (error) {

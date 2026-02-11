@@ -44,10 +44,10 @@ function App() {
       try {
         // If we have a token, verify it's still valid
         if (localStorage.getItem('accessToken')) {
-          const profile = (await authService.getUserProfile()) as any;
-          if (profile?.success) {
+          const profile = await authService.getUserProfile();
+          if (profile.success) {
             setIsAuthenticated(true);
-            setUserRole(profile?.data?.roles || []);
+            setUserRole(profile.data?.roles || []);
           } else {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
@@ -103,8 +103,8 @@ function App() {
     setIsAuthenticated(true);
     // Fetch updated user profile to get roles
     try {
-      const profile = (await authService.getUserProfile()) as any;
-      if (profile?.success && profile?.data?.roles) {
+      const profile = await authService.getUserProfile();
+      if (profile.success && profile.data?.roles) {
         setUserRole(profile.data.roles);
       }
     } catch (error) {
@@ -177,11 +177,11 @@ function App() {
           setIsAdminLoginOpen(false);
           // Fetch user profile to get roles
           try {
-            const profile = (await authService.getUserProfile()) as any;
+            const profile = await authService.getUserProfile();
             console.log('📋 Profile in callback:', profile);
-            if (profile?.success && profile?.data?.roles) {
-              console.log('👨‍💼 Setting user roles:', profile.data.roles);
-              setUserRole(profile.data.roles);
+            if (profile.success && profile.user?.roles) {
+              console.log('👨‍💼 Setting user roles:', profile.user.roles);
+              setUserRole(profile.user.roles);
             }
           } catch (error) {
             console.error("Failed to fetch admin profile:", error);

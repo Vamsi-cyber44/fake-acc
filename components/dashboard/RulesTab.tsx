@@ -42,8 +42,8 @@ const RulesTab: FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await httpClient.post('/api/rules', formData);
-      if (response.success) {
+      const response = (await httpClient.post('/api/rules', formData)) as any;
+      if (response?.success) {
         setFormData({
           name: '',
           description: '',
@@ -66,9 +66,9 @@ const RulesTab: FC = () => {
   const loadRules = async () => {
     setLoading(true);
     try {
-      const response = await httpClient.get('/api/rules');
-      if (response.success) {
-        setRules(response.data || []);
+      const response = (await httpClient.get('/api/rules')) as any;
+      if (response?.success) {
+        setRules(response?.data || []);
       }
     } catch (error) {
       console.error('Failed to load rules:', error);
@@ -80,8 +80,8 @@ const RulesTab: FC = () => {
   const deleteRule = async (ruleId: string) => {
     if (!window.confirm('Delete this rule?')) return;
     try {
-      const response = await httpClient.delete(`/api/rules/${ruleId}`);
-      if (response.success) {
+      const response = (await httpClient.delete(`/api/rules/${ruleId}`)) as any;
+      if (response?.success) {
         setRules(rules.filter(r => r._id !== ruleId));
       }
     } catch (error) {

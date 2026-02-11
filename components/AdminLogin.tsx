@@ -20,12 +20,12 @@ const AdminLogin: FC<AdminLoginProps> = ({ onLoginSuccess, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await authService.login({
+      const response = (await authService.login({
         email,
         password
-      });
+      })) as any;
 
-      if (response.success) {
+      if (response?.success) {
         // Verify user is admin
         const user = authService.getUser();
         if (user?.role === 'admin' || user?.roles?.includes('admin')) {
@@ -35,7 +35,7 @@ const AdminLogin: FC<AdminLoginProps> = ({ onLoginSuccess, onClose }) => {
           authService.logout();
         }
       } else {
-        setError(response.message || 'Login failed');
+        setError(response?.message || 'Login failed');
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred during login');

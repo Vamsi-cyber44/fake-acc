@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 export class ApiError extends Error {
   status: number;
   data: any;
@@ -10,7 +12,7 @@ export class ApiError extends Error {
   }
 }
 
-const API_BASE_URL = (import.meta.env as any)?.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const API_BASE_URL = (import.meta as any).env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 
 class HttpClient {
   private getAccessToken(): string | null {

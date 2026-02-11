@@ -20,9 +20,9 @@ const AdminScanManagement: FC = () => {
   const loadScans = async () => {
     setLoading(true);
     try {
-      const response = await httpClient.get('/api/scans/history');
-      if (response.success) {
-        setScans(response.data || []);
+      const response = (await httpClient.get('/api/scans/history')) as any;
+      if (response?.success) {
+        setScans(response?.data || []);
       }
     } catch (error) {
       console.error('Failed to load scans:', error);
@@ -41,9 +41,9 @@ const AdminScanManagement: FC = () => {
         return { platform, username };
       });
 
-      const response = await httpClient.post('/api/scans/batch', { profiles });
-      if (response.success) {
-        alert(`Batch scan started: ${response.data?.count || 0} profiles`);
+      const response = (await httpClient.post('/api/scans/batch', { profiles })) as any;
+      if (response?.success) {
+        alert(`Batch scan started: ${response?.data?.count || 0} profiles`);
         setBatchInput('');
         setShowBatchForm(false);
         loadScans();

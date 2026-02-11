@@ -24,16 +24,16 @@ const AuthModal: FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => {
     try {
       let response;
       if (mode === 'login') {
-        response = await authService.login({ email, password });
+        response = (await authService.login({ email, password })) as any;
       } else {
-        response = await authService.register({ email, password, username });
+        response = (await authService.register({ email, password, username })) as any;
       }
 
-      if (response.success) {
+      if (response?.success) {
         if (onSuccess) onSuccess();
         onClose();
       } else {
-        setError(response.message || 'Authentication failed');
+        setError(response?.message || 'Authentication failed');
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred');
